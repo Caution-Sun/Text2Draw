@@ -48,7 +48,8 @@
             android:text="내게 맞는 그림체 찾기"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            android:visibility="invisible" />
 
         <ImageButton
             android:id="@+id/buttonInfo"
