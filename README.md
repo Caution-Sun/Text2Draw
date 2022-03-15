@@ -20,9 +20,9 @@ Text를 입력받는 화면.
 ***
 
 <img src = "https://user-images.githubusercontent.com/60997821/158174971-52bf0e76-dff6-4eb3-8bb0-5ac497dd3956.jpg" width = "270" height = "600">
-입력한 Text와 선택한 그림체를 확인하는 화면. 이 화면에서 우하단 Make Image 버튼을 눌러 이미지를 생성.
+입력한 Text와 선택한 그림체를 확인하는 화면. 이 화면에서 우하단 MAKE IMAGE 버튼을 눌러 이미지를 생성.
 
 ***
 
 <img src = "https://user-images.githubusercontent.com/60997821/158175010-be6ff66e-76cf-451f-9515-12b77ce12476.jpg" width = "270" height = "600">
-만들어진 이미지를 띄우는 화면. Retry버튼을 통해 이전 화면으로 돌아갈 수 있다.
+만들어진 이미지를 띄우는 화면. RETRY버튼을 통해 이전 화면으로 돌아갈 수 있다.
