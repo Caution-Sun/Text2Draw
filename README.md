@@ -4,9 +4,9 @@
 ***
 
 ## 개발 환경
-Android Studio
+IDE : Android Studio
 
-Java
+Language : Java
 
 ***
 
