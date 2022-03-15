@@ -3,6 +3,12 @@
 
 ***
 
+# 화면 구성
+
+기본적으로 pager을 통해 각 화면을 슬라이드로 전환할 수 있도록 만들었다.
+
+***
+
 <img src = "https://user-images.githubusercontent.com/60997821/158174812-7286cd0c-a4f8-4459-91d4-97cd73ade76a.jpg" width = "270" height = "600">
 첫 화면. 로그인을 할지 선택할 수 있다.
 
