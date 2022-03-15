@@ -14,6 +14,8 @@ Language : Java
 
 기본적으로 pager을 통해 각 화면을 슬라이드로 전환할 수 있도록 만들었다.
 
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/60997821/158380035-88218b36-bc97-4b05-b508-6163496ef992.gif)
+
 ***
 
 <img src = "https://user-images.githubusercontent.com/60997821/158174812-7286cd0c-a4f8-4459-91d4-97cd73ade76a.jpg" width = "270" height = "600">
