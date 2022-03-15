@@ -14,6 +14,7 @@ Text를 입력받는 화면.
 ***
 
 <img src = "https://user-images.githubusercontent.com/60997821/158174903-3c821a9c-645e-47c3-9805-e381c5bb3fbc.jpg" width = "270" height = "600"> <img src = "https://user-images.githubusercontent.com/60997821/158174934-912c84be-36ab-45ce-92c4-feee7de4e4a7.jpg" width = "270" height = "600">
+
 그림체를 선택하는 화면. 우측상단 i버튼을 눌러 각 그림체에 대한 설명을 확인 가능.
 
 ***
