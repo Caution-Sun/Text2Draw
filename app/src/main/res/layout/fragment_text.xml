@@ -54,4 +54,10 @@
             android:textAlignment="gravity" />
     </androidx.cardview.widget.CardView>
 
+    <ImageButton
+        android:id="@+id/imageButtonMic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_btn_speak_now" />
+
 </LinearLayout>
