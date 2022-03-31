@@ -1,6 +1,9 @@
 package org.techtown.capston_sample_1;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,12 +20,23 @@ public class ResultActivity extends AppCompatActivity {
 
     Button buttonRetry;
 
+    ProgressDialog dialog;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
         Intent intent = getIntent();
         processIntent(intent);
+
+        dialog = new ProgressDialog(ResultActivity.this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("이미지를 만드는 중입니다.");
+        dialog.setCancelable(false);
+
+        //dialog.show();
+
+        //dialog.dismiss();
 
         buttonRetry = findViewById(R.id.buttonRetry);
         buttonRetry.setOnClickListener(new View.OnClickListener() {

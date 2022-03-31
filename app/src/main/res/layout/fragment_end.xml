@@ -7,6 +7,19 @@
     android:orientation="vertical"
     tools:context=".EndFragment" >
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/andika_new_basic_bold"
+        android:text="다음의 조합으로 그림이 만들어집니다"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
