@@ -11,22 +11,22 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class SignupActivity extends AppCompatActivity {
 
     String id;
     String pwd;
     String pwd2;
+    String agebuffer;
+    int age = 0;
     int sex = 0;
     int artist = 0;
 
     EditText editTextSignupId;
     EditText editTextSignupPwd;
     EditText editTextSignupPwd2;
+    EditText editTextSignupAge;
 
     Button buttonCancel;
     Button buttonSign;
@@ -47,6 +47,7 @@ public class SignupActivity extends AppCompatActivity {
         editTextSignupId = findViewById(R.id.editTextSignupId);
         editTextSignupPwd = findViewById(R.id.editTextSignupPwd);
         editTextSignupPwd2 = findViewById(R.id.editTextSignupPwd2);
+        editTextSignupAge = findViewById(R.id.editTextSignupAge);
 
         spinnerSex = findViewById(R.id.spinnerSex);
         ArrayAdapter<CharSequence> spinnerSex_adapter = ArrayAdapter.createFromResource(this, R.array.resourcesSex, android.R.layout.simple_spinner_item);
@@ -104,6 +105,7 @@ public class SignupActivity extends AppCompatActivity {
                 id = editTextSignupId.getText().toString();
                 pwd = editTextSignupPwd.getText().toString();
                 pwd2 = editTextSignupPwd2.getText().toString();
+                agebuffer = editTextSignupAge.getText().toString();
 
                 if(id.length() == 0){
                     Toast.makeText(getApplicationContext(),"아이디를 입력해주세요",Toast.LENGTH_SHORT).show();
@@ -117,8 +119,12 @@ public class SignupActivity extends AppCompatActivity {
                 else if(pwd.equals(pwd2) == false){
                     Toast.makeText(getApplicationContext(),"재입력된 비밀번호가 잘못됬습니다",Toast.LENGTH_SHORT).show();
                 }
+                else if(agebuffer.length() == 0){
+                    Toast.makeText(getApplicationContext(),"나이를 입력해주세요",Toast.LENGTH_SHORT).show();
+                }
                 else{
 
+                    age = Integer.parseInt(agebuffer);
                     Toast.makeText(getApplicationContext(),"회원가입에 성공했습니다",Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent();
