@@ -16,7 +16,8 @@ import android.widget.Toast;
 public class StartFragment extends Fragment {
 
     Button buttonLogin;
-    Button buttonSingup;
+    Button buttonSignup;
+    Button buttonSignupG;
     EditText textId;
     EditText textPassword;
 
@@ -28,7 +29,8 @@ public class StartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_start, container, false);
 
         buttonLogin = (Button) view.findViewById(R.id.buttonLogin);
-        buttonSingup = (Button) view.findViewById(R.id.buttonSignup);
+        buttonSignup = (Button) view.findViewById(R.id.buttonSignup);
+        buttonSignupG = (Button) view.findViewById(R.id.buttonLoginG);
         textId = (EditText) view.findViewById(R.id.editTextId);
         textPassword = (EditText) view.findViewById(R.id.editTextPassword);
 
@@ -53,10 +55,18 @@ public class StartFragment extends Fragment {
             }
         });
 
-        buttonSingup.setOnClickListener(new View.OnClickListener() {
+        buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SignupActivity.class);
+                startActivityForResult(intent, 101);
+            }
+        });
+
+        buttonSignupG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), GoogleSignupActivity.class);
                 startActivityForResult(intent, 101);
             }
         });

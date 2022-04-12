@@ -13,19 +13,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class SignupActivity extends AppCompatActivity {
+public class GoogleSignupActivity extends AppCompatActivity {
 
     String id;
-    String pwd;
-    String pwd2;
     String agebuffer;
     int age = 0;
     int sex = 0;
     int artist = 0;
 
     EditText editTextSignupId;
-    EditText editTextSignupPwd;
-    EditText editTextSignupPwd2;
     EditText editTextSignupAge;
 
     Button buttonCancel;
@@ -36,7 +32,7 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_google_signup);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -45,8 +41,6 @@ public class SignupActivity extends AppCompatActivity {
         buttonSign = findViewById(R.id.buttonSignG);
 
         editTextSignupId = findViewById(R.id.editTextSignupIdG);
-        editTextSignupPwd = findViewById(R.id.editTextSignupPwd);
-        editTextSignupPwd2 = findViewById(R.id.editTextSignupPwd2);
         editTextSignupAge = findViewById(R.id.editTextSignupAgeG);
 
         spinnerSex = findViewById(R.id.spinnerSexG);
@@ -103,21 +97,10 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 id = editTextSignupId.getText().toString();
-                pwd = editTextSignupPwd.getText().toString();
-                pwd2 = editTextSignupPwd2.getText().toString();
                 agebuffer = editTextSignupAge.getText().toString();
 
                 if(id.length() == 0){
                     Toast.makeText(getApplicationContext(),"아이디를 입력해주세요",Toast.LENGTH_SHORT).show();
-                }
-                else if(pwd.length() == 0){
-                    Toast.makeText(getApplicationContext(),"비밀번호를 입력해주세요",Toast.LENGTH_SHORT).show();
-                }
-                else if(pwd2.length() == 0){
-                    Toast.makeText(getApplicationContext(),"비밀번호를 재입력해주세요",Toast.LENGTH_SHORT).show();
-                }
-                else if(pwd.equals(pwd2) == false){
-                    Toast.makeText(getApplicationContext(),"재입력된 비밀번호가 잘못됬습니다",Toast.LENGTH_SHORT).show();
                 }
                 else if(agebuffer.length() == 0){
                     Toast.makeText(getApplicationContext(),"나이를 입력해주세요",Toast.LENGTH_SHORT).show();
@@ -134,6 +117,5 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 }

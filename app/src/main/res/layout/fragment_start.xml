@@ -93,11 +93,20 @@
 
             <Button
                 android:id="@+id/buttonLogin"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/btn_background"
                 android:text="Log In" />
+
+            <Button
+                android:id="@+id/buttonLoginG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_background"
+                android:text="Google 계정으로 로그인" />
 
             <Button
                 android:id="@+id/buttonSignup"
