@@ -13,21 +13,30 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class GoogleSignupActivity extends AppCompatActivity {
 
+    private static final String TAG = "<<GoogleSignupActivity>>";
+
     String id;
-    String agebuffer;
-    int age = 0;
-    int sex = 0;
-    int artist = 0;
+    String age;
+    String sex;
+    String artist;
 
     EditText editTextSignupId;
     EditText editTextSignupAge;
+    Spinner spinnerSex;
+    Spinner spinnerArtist;
 
     Button buttonCancel;
     Button buttonSign;
-    Spinner spinnerSex;
-    Spinner spinnerArtist;
+
+    FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,9 @@ public class GoogleSignupActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Text2Drawing");
 
         buttonCancel = findViewById(R.id.buttonCancel);
         buttonSign = findViewById(R.id.buttonSignG);
@@ -48,11 +60,15 @@ public class GoogleSignupActivity extends AppCompatActivity {
         spinnerSex_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSex.setAdapter(spinnerSex_adapter);
 
-
         spinnerArtist = findViewById(R.id.spinnerArtistG);
         ArrayAdapter<CharSequence> spinnerArtist_adapter = ArrayAdapter.createFromResource(this, R.array.resourcesArtist, android.R.layout.simple_spinner_item);
         spinnerArtist_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerArtist.setAdapter(spinnerArtist_adapter);
+
+        // 구글계정 아이디 자동입력
+        Intent getIdIntent = getIntent();
+        editTextSignupId.setText(getIdIntent.getStringExtra("emailId"));
+        editTextSignupId.setEnabled(false);
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,29 +81,27 @@ public class GoogleSignupActivity extends AppCompatActivity {
         });
 
         spinnerSex.setSelection(0);
-
         spinnerSex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                sex = i;
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sex = (String) parent.getItemAtPosition(position);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
 
         spinnerArtist.setSelection(0);
-
         spinnerArtist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                artist = i;
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                artist = (String) parent.getItemAtPosition(position);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -95,19 +109,22 @@ public class GoogleSignupActivity extends AppCompatActivity {
         buttonSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 id = editTextSignupId.getText().toString();
-                agebuffer = editTextSignupAge.getText().toString();
+                age = editTextSignupAge.getText().toString();
 
-                if(id.length() == 0){
-                    Toast.makeText(getApplicationContext(),"아이디를 입력해주세요",Toast.LENGTH_SHORT).show();
-                }
-                else if(agebuffer.length() == 0){
+                if(age.length() == 0){
                     Toast.makeText(getApplicationContext(),"나이를 입력해주세요",Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else{
+                    // 회원정보 데이터베이스 등록
+                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                    User user = new User();
+                    user.setUid(firebaseUser.getUid());
+                    user.setEmailId(firebaseUser.getEmail());
+                    user.setAge(age);
+                    user.setSex(sex);
+                    user.setArtist(artist);
+                    databaseReference.child("User").child(firebaseUser.getUid()).setValue(user);
 
-                    age = Integer.parseInt(agebuffer);
                     Toast.makeText(getApplicationContext(),"회원가입에 성공했습니다",Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent();

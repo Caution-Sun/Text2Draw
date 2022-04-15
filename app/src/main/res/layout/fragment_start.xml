@@ -89,7 +89,7 @@
                 android:layout_gravity="center"
                 android:ems="10"
                 android:hint="PassWord"
-                android:inputType="textPassword" />
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/buttonLogin"

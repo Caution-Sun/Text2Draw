@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:orientation="vertical"
-    tools:context=".SignupActivity">
+    tools:context=".GoogleSignupActivity">
 
     <Button
         android:id="@+id/buttonCancel"

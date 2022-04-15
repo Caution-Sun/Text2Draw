@@ -1,10 +1,13 @@
 package org.techtown.capston_sample_1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,25 +16,37 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SignupActivity extends AppCompatActivity {
+
+    private static final String TAG = "<<SignupActivity>>";
 
     String id;
     String pwd;
     String pwd2;
-    String agebuffer;
-    int age = 0;
-    int sex = 0;
-    int artist = 0;
+    String age;
+    String sex;
+    String artist;
 
     EditText editTextSignupId;
     EditText editTextSignupPwd;
     EditText editTextSignupPwd2;
     EditText editTextSignupAge;
+    Spinner spinnerSex;
+    Spinner spinnerArtist;
 
     Button buttonCancel;
     Button buttonSign;
-    Spinner spinnerSex;
-    Spinner spinnerArtist;
+
+    FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +55,9 @@ public class SignupActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Text2Drawing");
 
         buttonCancel = findViewById(R.id.buttonCancel);
         buttonSign = findViewById(R.id.buttonSignG);
@@ -71,66 +89,92 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         spinnerSex.setSelection(0);
-
         spinnerSex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                sex = i;
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sex = (String) parent.getItemAtPosition(position);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
 
         spinnerArtist.setSelection(0);
-
         spinnerArtist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                artist = i;
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                artist = (String) parent.getItemAtPosition(position);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
 
+        // 회원가입
         buttonSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 id = editTextSignupId.getText().toString();
                 pwd = editTextSignupPwd.getText().toString();
                 pwd2 = editTextSignupPwd2.getText().toString();
-                agebuffer = editTextSignupAge.getText().toString();
+                age = editTextSignupAge.getText().toString();
 
-                if(id.length() == 0){
+                if(id.length() == 0) {
                     Toast.makeText(getApplicationContext(),"아이디를 입력해주세요",Toast.LENGTH_SHORT).show();
-                }
-                else if(pwd.length() == 0){
+                } else if(pwd.length() < 6) {
                     Toast.makeText(getApplicationContext(),"비밀번호를 입력해주세요",Toast.LENGTH_SHORT).show();
-                }
-                else if(pwd2.length() == 0){
+                } else if(pwd2.length() < 6) {
                     Toast.makeText(getApplicationContext(),"비밀번호를 재입력해주세요",Toast.LENGTH_SHORT).show();
-                }
-                else if(pwd.equals(pwd2) == false){
-                    Toast.makeText(getApplicationContext(),"재입력된 비밀번호가 잘못됬습니다",Toast.LENGTH_SHORT).show();
-                }
-                else if(agebuffer.length() == 0){
+                } else if(!pwd.equals(pwd2)) {
+                    Toast.makeText(getApplicationContext(),"재입력된 비밀번호가 잘못되었습니다",Toast.LENGTH_SHORT).show();
+                } else if(age.length() == 0) {
                     Toast.makeText(getApplicationContext(),"나이를 입력해주세요",Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
+                    firebaseAuth.createUserWithEmailAndPassword(id, pwd).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                // 회원가입 성공
+                                Log.d(TAG, "회원가입 성공");
 
-                    age = Integer.parseInt(agebuffer);
-                    Toast.makeText(getApplicationContext(),"회원가입에 성공했습니다",Toast.LENGTH_SHORT).show();
+                                // 회원정보 생성
+                                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                                User user = new User();
+                                user.setUid(firebaseUser.getUid());
+                                user.setEmailId(firebaseUser.getEmail());
+                                user.setPassword(pwd);
+                                user.setAge(age);
+                                user.setSex(sex);
+                                user.setArtist(artist);
 
-                    Intent intent = new Intent();
-                    setResult(RESULT_OK, intent);
+                                // 데이터베이스 등록
+                                databaseReference.child("User").child(firebaseUser.getUid()).setValue(user);
 
-                    finish();
+                                Toast.makeText(getApplicationContext(),"회원가입에 성공하였습니다",Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent();
+                                setResult(RESULT_OK, intent);
+
+                                finish();
+                            } else {
+                                // 회원가입 실패
+                                // 파이어베이스 규칙 : 이메일 중복 또는 비밀번호 5글자 이하 입력 시 회원가입 실패
+                                Log.w(TAG, "회원가입 실패");
+
+                                // 회원가입 실패 다이얼로그
+                                AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+                                builder.setTitle("회원가입 실패")
+                                        .setMessage("이메일 중복")
+                                        .setPositiveButton("확인", null);
+                                AlertDialog alertDialog = builder.create();
+                                alertDialog.show();
+                            }
+                        }
+                    });
                 }
             }
         });
