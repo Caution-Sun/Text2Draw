@@ -1,5 +1,6 @@
 package org.techtown.capston_sample_1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -13,12 +14,24 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.mlkit.common.model.DownloadConditions;
+import com.google.mlkit.nl.translate.TranslateLanguage;
+import com.google.mlkit.nl.translate.Translation;
+import com.google.mlkit.nl.translate.Translator;
+import com.google.mlkit.nl.translate.TranslatorOptions;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String TAG = "<<MainActivity>>";
 
     ViewPager pager;
 
@@ -34,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
     final int PERMISSION = 1;
 
+    // 번역
+    Translator koToEnTranslator;
+    String translatedInput; // 영어로 번역된 글자
+    Boolean downloadCheck = false; // 번역 모델 다운로드 확인
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +63,24 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        // 번역 초기화
+        TranslatorOptions options = new TranslatorOptions.Builder()
+                .setSourceLanguage(TranslateLanguage.KOREAN)
+                .setTargetLanguage(TranslateLanguage.ENGLISH)
+                .build();
+        koToEnTranslator = Translation.getClient(options);
+
+        // 번역 모델 다운로드
+        DownloadConditions conditions = new DownloadConditions.Builder()
+                .requireWifi()
+                .build();
+        koToEnTranslator.downloadModelIfNeeded(conditions).addOnSuccessListener(unused -> {
+            Log.d(TAG, "번역 모델 다운로드 성공");
+            downloadCheck = true;
+        }).addOnFailureListener(e -> {
+            Log.w(TAG, "번역 모델 다운로드 실패");
+        });
 
         buttonBack = findViewById(R.id.buttonBack);
         buttonNext = findViewById(R.id.buttonNext);
@@ -75,11 +111,22 @@ public class MainActivity extends AppCompatActivity {
                 }else if(pager.getCurrentItem() == 2){
                     pager.setCurrentItem(3);
                 }else if(pager.getCurrentItem() == 3){
+                    if(downloadCheck) {
+                        // 번역
+                        koToEnTranslator.translate(textInputed).addOnSuccessListener(s -> {
+                            // 번역 성공
+                            translatedInput = s;
+                        }).addOnFailureListener(e -> {
+                            // 번역 실패
+                        });
+                    }
+
                     Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
                     intent.putExtra("login",login);
                     intent.putExtra("id", id);
                     intent.putExtra("text", textInputed);
                     intent.putExtra("style", styleInputed);
+                    intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
                     startActivityForResult(intent, 101);
                 }
             }
