@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 번역
     Translator koToEnTranslator;
-    String translatedInput; // 영어로 번역된 글자
+    String translatedInput = ""; // 영어로 번역된 글자
     Boolean downloadCheck = false; // 번역 모델 다운로드 확인
 
     @Override
@@ -116,18 +116,21 @@ public class MainActivity extends AppCompatActivity {
                         koToEnTranslator.translate(textInputed).addOnSuccessListener(s -> {
                             // 번역 성공
                             translatedInput = s;
+                            Log.d(TAG, translatedInput);
+
+                            Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
+                            intent.putExtra("login",login);
+                            intent.putExtra("id", id);
+                            intent.putExtra("text", textInputed);
+                            intent.putExtra("style", styleInputed);
+                            intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
+                            startActivityForResult(intent, 101);
                         }).addOnFailureListener(e -> {
                             // 번역 실패
                         });
                     }
 
-                    Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
-                    intent.putExtra("login",login);
-                    intent.putExtra("id", id);
-                    intent.putExtra("text", textInputed);
-                    intent.putExtra("style", styleInputed);
-                    intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
-                    startActivityForResult(intent, 101);
+
                 }
             }
         });

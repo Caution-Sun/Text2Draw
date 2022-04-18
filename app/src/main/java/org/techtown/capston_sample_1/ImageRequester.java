@@ -45,8 +45,7 @@ public class ImageRequester {
 
                 // 데이터 전송
                 pw = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"));
-                pw.write(strings[0]);
-                pw.write(strings[1]);
+                pw.write(strings[0] + " | " + strings[1]);
                 pw.flush();
 
                 // 데이터 수신

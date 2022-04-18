@@ -6,10 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +22,7 @@ public class ResultActivity extends AppCompatActivity {
     String id = "";
     String text = "";
     String style = "";
-    String translatedInput; // 영어로 번역된 글자
+    String translated = ""; // 영어로 번역된 글자
 
     Button buttonRetry;
 
@@ -29,8 +31,8 @@ public class ResultActivity extends AppCompatActivity {
     ImageView iv_result;
 
     // 서버 통신
-    String serverIp = "192.168.0.1";
-    int serverPort = 8000;
+    String serverIp = "192.168.0.8";
+    int serverPort = 2031;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +68,8 @@ public class ResultActivity extends AppCompatActivity {
 
         // 서버로부터 결과 이미지 수신
         ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
-        imageRequester.requestImage(translatedInput, style);
-
+        imageRequester.requestImage(translated, style);
+        Log.d("<<ResultActivity>>", translated);
     }
 
     private void processIntent(Intent intent){
@@ -78,7 +80,7 @@ public class ResultActivity extends AppCompatActivity {
             id = bundle.getString("id");
             text = bundle.getString("text");
             style = bundle.getString("style");
-            translatedInput = bundle.getString("translatedInput");
+            translated = bundle.getString("translatedInput");
         }
     }
 
