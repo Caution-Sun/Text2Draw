@@ -27,30 +27,11 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Text"
+                android:text=" Text To Draw"
                 android:textColor="@color/black"
                 android:textSize="48sp"
                 android:textStyle="italic" />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="To"
-                android:textColor="@color/black"
-                android:textSize="48sp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="Draw"
-                android:textColor="@color/black"
-                android:textSize="48sp"
-                android:textStyle="italic" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
