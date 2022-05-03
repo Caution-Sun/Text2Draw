@@ -15,6 +15,7 @@ public class EndFragment extends Fragment {
 
     TextView textInput;
     TextView styleInput;
+    TextView qualityText;
     ImageView styleImage;
     SeekBar seekbarQuality;
 
@@ -27,11 +28,20 @@ public class EndFragment extends Fragment {
         textInput = (TextView) view.findViewById(R.id.textInputText);
         styleInput = (TextView) view.findViewById(R.id.textSelectedStyle);
         styleImage = (ImageView) view.findViewById(R.id.imageStyle);
+        qualityText = (TextView) view.findViewById(R.id.textViewQuality);
         seekbarQuality = (SeekBar) view.findViewById(R.id.seekBarQuality);
 
         seekbarQuality.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                if (i % 50 == 0) {
+                    qualityText.setText(String.valueOf(i));
+                } else {
+                    seekbarQuality.setProgress((i/ 50) * 50);
+                    qualityText.setText(String.valueOf((i / 50) * 50));
+                }
+                //qualityText.setText(Integer.toString(i));
                 ((MainActivity)getActivity()).quality = Integer.toString(i);
             }
 
