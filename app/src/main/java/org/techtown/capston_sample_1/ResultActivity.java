@@ -68,7 +68,7 @@ public class ResultActivity extends AppCompatActivity {
 
         // 서버로부터 결과 이미지 수신
         ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
-        imageRequester.requestImage(translated, style);
+        imageRequester.requestImage(translated, style, "100");
         Log.d("<<ResultActivity>>", translated);
     }
 
