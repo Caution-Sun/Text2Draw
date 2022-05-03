@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     final int PERMISSION = 1;
 
+    String quality = "100";
+
     // 번역
     Translator koToEnTranslator;
     String translatedInput = ""; // 영어로 번역된 글자
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("id", id);
                             intent.putExtra("text", textInputed);
                             intent.putExtra("style", styleInputed);
+                            intent.putExtra("quality", quality);
                             intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
                             startActivityForResult(intent, 101);
                         }).addOnFailureListener(e -> {

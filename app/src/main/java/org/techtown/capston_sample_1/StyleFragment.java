@@ -51,9 +51,9 @@ public class StyleFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         StyleAdapter adapter = new StyleAdapter();
 
-        adapter.addItem(new Style(R.drawable.sample_icon_1, "피카소"));
-        adapter.addItem(new Style(R.drawable.sample_icon_2, "모던 아트"));
-        adapter.addItem(new Style(R.drawable.sample_icon_3, "팝 아트"));
+        adapter.addItem(new Style(R.drawable.sample_icon_1, "Picasso"));
+        adapter.addItem(new Style(R.drawable.sample_icon_2, "Modern art"));
+        adapter.addItem(new Style(R.drawable.sample_icon_3, "Pop Art"));
 
         recyclerView.setAdapter(adapter);
 

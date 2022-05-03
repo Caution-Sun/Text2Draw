@@ -11,6 +11,7 @@ import android.speech.SpeechRecognizer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -23,6 +24,8 @@ public class TextFragment extends Fragment {
     ImageButton imageButtonMic;
     Intent intentMic;
     SpeechRecognizer mRecognizer;
+    Button buttonSampleText1;
+    Button buttonSampleText2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +35,22 @@ public class TextFragment extends Fragment {
 
         editText = (EditText) view.findViewById(R.id.editText);
         imageButtonMic = (ImageButton) view.findViewById(R.id.imageButtonMic);
+        buttonSampleText1 = (Button) view.findViewById(R.id.buttonSampleText1);
+        buttonSampleText2 = (Button) view.findViewById(R.id.buttonSampleText2);
+
+        buttonSampleText1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editText.setText("과일 그릇에 담긴 사과 그림");
+            }
+        });
+
+        buttonSampleText2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editText.setText("반 고흐의 초상화가 그려진 침실 그림");
+            }
+        });
 
         intentMic = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intentMic.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getActivity().getPackageName());

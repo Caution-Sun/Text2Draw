@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class EndFragment extends Fragment {
@@ -15,6 +16,7 @@ public class EndFragment extends Fragment {
     TextView textInput;
     TextView styleInput;
     ImageView styleImage;
+    SeekBar seekbarQuality;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,6 +27,24 @@ public class EndFragment extends Fragment {
         textInput = (TextView) view.findViewById(R.id.textInputText);
         styleInput = (TextView) view.findViewById(R.id.textSelectedStyle);
         styleImage = (ImageView) view.findViewById(R.id.imageStyle);
+        seekbarQuality = (SeekBar) view.findViewById(R.id.seekBarQuality);
+
+        seekbarQuality.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                ((MainActivity)getActivity()).quality = Integer.toString(i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         return view;
     }

@@ -22,6 +22,7 @@ public class ResultActivity extends AppCompatActivity {
     String id = "";
     String text = "";
     String style = "";
+    String quality = "100";
     String translated = ""; // 영어로 번역된 글자
 
     Button buttonRetry;
@@ -68,7 +69,7 @@ public class ResultActivity extends AppCompatActivity {
 
         // 서버로부터 결과 이미지 수신
         ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
-        imageRequester.requestImage(translated, style, "100");
+        imageRequester.requestImage(translated, style, quality);
         Log.d("<<ResultActivity>>", translated);
     }
 
@@ -80,6 +81,7 @@ public class ResultActivity extends AppCompatActivity {
             id = bundle.getString("id");
             text = bundle.getString("text");
             style = bundle.getString("style");
+            quality = bundle.getString("quality");
             translated = bundle.getString("translatedInput");
         }
     }
