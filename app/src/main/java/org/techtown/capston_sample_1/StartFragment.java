@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -52,6 +54,11 @@ public class StartFragment extends Fragment {
     String emailId;
     String password;
 
+    LinearLayout layoutLogin;
+    LinearLayout layoutWelcome;
+
+    TextView textViewId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,6 +70,11 @@ public class StartFragment extends Fragment {
         buttonSignupG = view.findViewById(R.id.buttonLoginG);
         textId = view.findViewById(R.id.editTextId);
         textPassword = view.findViewById(R.id.editTextPassword);
+
+        layoutLogin = view.findViewById(R.id.layoutLogIn);
+        layoutWelcome = view.findViewById(R.id.layoutWelcome);
+
+        textViewId = view.findViewById(R.id.textViewId);
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Text2Drawing");
@@ -92,6 +104,11 @@ public class StartFragment extends Fragment {
                                 ((MainActivity) getActivity()).pwd = textPassword.getText().toString();
                                 ((MainActivity) getActivity()).login = true;
                                 buttonLogin.setText("LogOut");
+
+                                textViewId.setText(emailId);
+                                layoutLogin.setVisibility(view.INVISIBLE);
+                                layoutWelcome.setVisibility(view.VISIBLE);
+
                             } else {
                                 // 이메일 로그인 실패
                                 Log.w(TAG, "이메일 로그인 실패");
@@ -111,6 +128,10 @@ public class StartFragment extends Fragment {
                     ((MainActivity) getActivity()).pwd = "";
                     ((MainActivity) getActivity()).login = false;
                     buttonLogin.setText("Log In");
+
+                    layoutWelcome.setVisibility(view.INVISIBLE);
+                    layoutLogin.setVisibility(view.VISIBLE);
+                    textViewId.setText("");
                 }
             }
         });

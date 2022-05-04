@@ -54,23 +54,56 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editTextId"
-                android:layout_width="250dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:hint="ID"
-                android:inputType="textEmailAddress" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="250dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:hint="PassWord"
-                android:inputType="text" />
+                <LinearLayout
+                    android:id="@+id/layoutWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:id="@+id/textViewId"
+                        android:layout_width="250dp"
+                        android:layout_height="48dp"
+                        android:text="Email" />
+
+                    <TextView
+                        android:id="@+id/textViewWelcome"
+                        android:layout_width="250dp"
+                        android:layout_height="48dp"
+                        android:text="환영합니다" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutLogIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <EditText
+                        android:id="@+id/editTextId"
+                        android:layout_width="250dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:hint="ID"
+                        android:inputType="textEmailAddress" />
+
+                    <EditText
+                        android:id="@+id/editTextPassword"
+                        android:layout_width="250dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:hint="PassWord"
+                        android:inputType="text" />
+                </LinearLayout>
+            </FrameLayout>
 
             <Button
                 android:id="@+id/buttonLogin"
