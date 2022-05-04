@@ -109,6 +109,8 @@ public class StartFragment extends Fragment {
                                 layoutLogin.setVisibility(view.INVISIBLE);
                                 layoutWelcome.setVisibility(view.VISIBLE);
 
+                                ((MainActivity) getActivity()).pager.setCurrentItem(1);
+
                             } else {
                                 // 이메일 로그인 실패
                                 Log.w(TAG, "이메일 로그인 실패");
@@ -201,6 +203,8 @@ public class StartFragment extends Fragment {
 
                                         ((MainActivity) getActivity()).login = true;
                                         buttonLogin.setText("LogOut");
+
+                                        ((MainActivity) getActivity()).pager.setCurrentItem(1);
                                     }
                                 }
 
