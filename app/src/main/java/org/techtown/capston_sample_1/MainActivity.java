@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                         styleFragment.selectedStyle.setName("Picasso");
                         break;
                     case 1:
-                        styleFragment.selectedStyle.setName("Modern art");
+                        styleFragment.selectedStyle.setName("Monet");
                         break;
                     case 2:
                         styleFragment.selectedStyle.setName("Pop Art");
