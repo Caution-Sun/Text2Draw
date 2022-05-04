@@ -28,6 +28,7 @@ import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button buttonBack;
     Button buttonNext;
+    Button buttonRandom;
 
     String textInputed = "";
     String styleInputed = "";
@@ -58,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Random random = new Random();
+        random.setSeed(System.currentTimeMillis());
 
         if(Build.VERSION.SDK_INT >= 23){
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO}, PERMISSION);
@@ -89,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
         buttonBack.setVisibility(View.GONE);
         buttonNext.setText("Start!");
+
+        buttonRandom = findViewById(R.id.buttonRandom);
+
+        buttonRandom.setVisibility(View.INVISIBLE);
+        buttonRandom.setEnabled(false);
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,6 +168,37 @@ public class MainActivity extends AppCompatActivity {
 
         pager.setAdapter(adapter);
 
+        buttonRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int ranText = random.nextInt(2);
+                int ranStyle = random.nextInt(3);
+
+                switch (ranText){
+                    case 0:
+                        textFragment.editText.setText("과일 그릇에 담긴 사과 그림");
+                        break;
+                    case 1:
+                        textFragment.editText.setText("반 고흐의 초상화가 그려진 침실 그림");
+                        break;
+                }
+
+                switch(ranStyle){
+                    case 0:
+                        styleFragment.selectedStyle.setName("Picasso");
+                        break;
+                    case 1:
+                        styleFragment.selectedStyle.setName("Modern art");
+                        break;
+                    case 2:
+                        styleFragment.selectedStyle.setName("Pop Art");
+                        break;
+                }
+                pager.setCurrentItem(3);
+            }
+        });
+
 
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -169,8 +210,16 @@ public class MainActivity extends AppCompatActivity {
                 if (position == 0){
                     buttonBack.setVisibility(View.GONE);
                     buttonNext.setText("Start!");
-                }else if(position == 3) {
+
+                    buttonRandom.setVisibility(View.GONE);
+                    buttonRandom.setEnabled(false);
+
+                } else if(position == 3) {
+
                     buttonNext.setText("Make Image!");
+
+                    buttonRandom.setVisibility(View.INVISIBLE);
+                    buttonRandom.setEnabled(false);
 
                     textInputed = textFragment.editText.getText().toString();
                     styleInputed = styleFragment.selectedStyle.getName();
@@ -190,6 +239,10 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }else{
+
+                    buttonRandom.setVisibility(View.VISIBLE);
+                    buttonRandom.setEnabled(true);
+
                     buttonBack.setVisibility(View.VISIBLE);
                     buttonNext.setText("Next");
                     buttonNext.setEnabled(true);
