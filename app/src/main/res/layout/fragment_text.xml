@@ -35,7 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
-            android:text="Sample" />
+            android:text="Sample"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
