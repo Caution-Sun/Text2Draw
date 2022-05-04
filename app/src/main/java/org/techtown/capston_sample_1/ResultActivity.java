@@ -1,11 +1,17 @@
 package org.techtown.capston_sample_1;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +23,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+
 public class ResultActivity extends AppCompatActivity {
 
     boolean login = false;
@@ -26,14 +35,17 @@ public class ResultActivity extends AppCompatActivity {
     String quality = "100";
     String translated = ""; // 영어로 번역된 글자
 
+    String imageName;
+    Bitmap resultImage;
+
     TextView tv_rating;
     RatingBar ratingBar;
     Button btn_ratingRegister;
     Button buttonRetry;
+    Button buttonSaveImage;
+    ImageView iv_result;
 
     ProgressDialog dialog;
-
-    ImageView iv_result;
 
     // 서버 통신
     String serverIp = "192.168.0.8";
@@ -49,6 +61,8 @@ public class ResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         processIntent(intent);
 
+        imageName = text + ".jpg";
+
         dialog = new ProgressDialog(ResultActivity.this);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setMessage("이미지를 만드는 중입니다.");
@@ -62,31 +76,71 @@ public class ResultActivity extends AppCompatActivity {
         tv_rating = findViewById(R.id.tv_rating);
         ratingBar = findViewById(R.id.ratingBar);
         btn_ratingRegister = findViewById(R.id.btn_ratingRegister);
+        buttonSaveImage = findViewById(R.id.btn_saveImage);
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                String strRating = "평점을 입력해 주세요 (" + rating + "/5.0)";
-                ratingBar.setRating(rating);
-                tv_rating.setText(strRating);
-            }
+        ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            String strRating = "평점을 입력해 주세요 (" + rating + "/5.0)";
+            ratingBar.setRating(rating);
+            tv_rating.setText(strRating);
         });
 
         buttonRetry = findViewById(R.id.buttonRetry);
-        buttonRetry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
+        buttonRetry.setOnClickListener(v -> {
+            Intent intent1 = new Intent();
+            setResult(RESULT_OK, intent1);
 
-                finish();
-            }
+            finish();
+        });
+
+        // 이미지 저장
+        buttonSaveImage.setOnClickListener(v -> {
+            saveImage();
         });
 
         // 서버로부터 결과 이미지 수신
         ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
         imageRequester.requestImage(translated, style, quality);
         Log.d("<<ResultActivity>>", translated);
+    }
+
+    private void saveImage() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, imageName);
+            contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+            contentValues.put(MediaStore.Images.Media.IS_PENDING, 1);
+
+            Uri imageCollection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+            ContentResolver contentResolver = getContentResolver();
+            Uri imageItem = contentResolver.insert(imageCollection, contentValues);
+
+            try {
+                ParcelFileDescriptor pfd = contentResolver.openFileDescriptor(imageItem, "w", null);
+
+                if(pfd != null) {
+                    byte[] bitmapToBytes = bitmapToByteArray(resultImage);
+                    FileOutputStream fos = new FileOutputStream(pfd.getFileDescriptor());
+                    fos.write(bitmapToBytes);
+                    fos.close();
+
+                    contentValues.clear();
+                    contentValues.put(MediaStore.Images.Media.IS_PENDING, 0);
+                    contentResolver.update(imageItem, contentValues, null, null);
+                } else {
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public byte[] bitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        byte[] byteArray = bos.toByteArray();
+
+        return byteArray;
     }
 
     private void processIntent(Intent intent){
@@ -107,6 +161,7 @@ public class ResultActivity extends AppCompatActivity {
         @Override
         public void onResult(Bitmap resultBitmap) {
             iv_result.setImageBitmap(resultBitmap);
+            resultImage = resultBitmap;
         }
     };
 
