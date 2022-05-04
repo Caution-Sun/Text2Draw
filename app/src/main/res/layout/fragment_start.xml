@@ -101,7 +101,7 @@
                         android:layout_gravity="center"
                         android:ems="10"
                         android:hint="PassWord"
-                        android:inputType="text" />
+                        android:inputType="textPassword" />
                 </LinearLayout>
             </FrameLayout>
 
