@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,9 @@ public class ResultActivity extends AppCompatActivity {
     String quality = "100";
     String translated = ""; // 영어로 번역된 글자
 
+    TextView tv_rating;
+    RatingBar ratingBar;
+    Button btn_ratingRegister;
     Button buttonRetry;
 
     ProgressDialog dialog;
@@ -55,6 +59,18 @@ public class ResultActivity extends AppCompatActivity {
         //dialog.dismiss();
 
         iv_result = findViewById(R.id.iv_result);
+        tv_rating = findViewById(R.id.tv_rating);
+        ratingBar = findViewById(R.id.ratingBar);
+        btn_ratingRegister = findViewById(R.id.btn_ratingRegister);
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                String strRating = "평점을 입력해 주세요 (" + rating + "/5.0)";
+                ratingBar.setRating(rating);
+                tv_rating.setText(strRating);
+            }
+        });
 
         buttonRetry = findViewById(R.id.buttonRetry);
         buttonRetry.setOnClickListener(new View.OnClickListener() {
