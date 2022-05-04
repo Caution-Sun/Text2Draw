@@ -69,13 +69,21 @@
                         android:id="@+id/textViewId"
                         android:layout_width="250dp"
                         android:layout_height="48dp"
-                        android:text="Email" />
+                        android:gravity="center"
+                        android:text="Email"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textViewWelcome"
                         android:layout_width="250dp"
                         android:layout_height="48dp"
-                        android:text="환영합니다" />
+                        android:gravity="center"
+                        android:text="환영합니다"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
