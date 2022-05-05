@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("style", styleInputed);
                             intent.putExtra("quality", quality);
                             intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
-                            startActivityForResult(intent, 101);
+                            startActivity(intent);
                         }).addOnFailureListener(e -> {
                             // 번역 실패
                         });
