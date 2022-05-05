@@ -84,23 +84,21 @@ public class ResultActivity extends AppCompatActivity {
             tv_rating.setText(strRating);
         });
 
+        // 서버로부터 결과 이미지 수신
+        ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
+        imageRequester.requestImage(translated, style, quality);
+        Log.d("<<ResultActivity>>", translated);
+
+        // 서버에 이미지 다시 요청
         buttonRetry = findViewById(R.id.buttonRetry);
         buttonRetry.setOnClickListener(v -> {
-            Intent intent1 = new Intent();
-            setResult(RESULT_OK, intent1);
-
-            finish();
+            imageRequester.requestImage(translated, style, quality);
         });
 
         // 이미지 저장
         buttonSaveImage.setOnClickListener(v -> {
             saveImage();
         });
-
-        // 서버로부터 결과 이미지 수신
-        ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
-        imageRequester.requestImage(translated, style, quality);
-        Log.d("<<ResultActivity>>", translated);
     }
 
     private void saveImage() {
