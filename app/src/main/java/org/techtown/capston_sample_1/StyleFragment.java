@@ -54,7 +54,7 @@ public class StyleFragment extends Fragment {
         adapter.addItem(new Style(R.drawable.picasso_icon, "Picasso"));
         adapter.addItem(new Style(R.drawable.monet_icon, "Monet"));
         adapter.addItem(new Style(R.drawable.popart_icon, "Pop Art"));
-        adapter.addItem(new Style(R.drawable.sample_icon_1, "None"));
+        adapter.addItem(new Style(R.drawable.none_icon, "None"));
 
         recyclerView.setAdapter(adapter);
 
