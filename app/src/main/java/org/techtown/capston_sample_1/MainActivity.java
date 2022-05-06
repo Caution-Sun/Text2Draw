@@ -28,6 +28,7 @@ import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -172,38 +173,43 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                int ranText1 = random.nextInt(4);
+                int ranText2 = random.nextInt(10);
+                int ranText3 = random.nextInt(34);
                 int ranStyle = random.nextInt(4);
                 int ranQul = random.nextInt(9);
 
-                textInputed = "Random";
+                ArrayList<String> text1 = new ArrayList<String>(Arrays.asList("A painting of a", "A pencil art sketch of a", "An illustration of a" ,"A photograph of a"));
+                ArrayList<String> text2 = new ArrayList<String>(Arrays.asList("spinning", "dreaming", "watering", "loving" ,"eating", "drinking", "sleeping", "repeating", "surreal", "psychedelic"));
+                ArrayList<String> text3 = new ArrayList<String>(Arrays.asList("fish", "egg", "peacock", "watermelon", "pickle", "horse", "dog", "house", "kitchen", "bedroom", "door", "table", "lamp", "dresser", "watch", "logo", "icon", "tree",
+                        "grass", "flower", "plant", "shrub" ,"bloom" ,"screwdriver", "spanner", "figurine", "statue", "graveyard", "hotel", "bus", "train", "car", "computer", "monitor"));
+                String ranText = "";
 
-                translatedInput = "Random";
+                ranText += text1.get(ranText1) + " " + text2.get(ranText2) + " " + text3.get(ranText3);
+
+                textFragment.editText.setText(ranText);
 
                 switch(ranStyle){
                     case 0:
-                        styleInputed = "Picasso";
+                        styleFragment.selectedStyle.setName("Picasso");
                         break;
                     case 1:
-                        styleInputed = "Monet";
+                        styleFragment.selectedStyle.setName("Monet");
                         break;
                     case 2:
-                        styleInputed = "Pop Art";
+                        styleFragment.selectedStyle.setName("Pop Art");
                         break;
                     case 3:
-                        styleInputed = "none";
+                        styleFragment.selectedStyle.setName("none");
                         break;
                 }
 
-                qualityInputed = Integer.toString(100 + (ranQul * 50));
+                int randomQuality = 100 + (ranQul * 50);
+                endFragment.seekbarQuality.setProgress(randomQuality);
+                endFragment.qualityText.setText(String.valueOf(randomQuality));
+                qualityInputed = Integer.toString(randomQuality);
 
-                Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
-                intent.putExtra("login",login);
-                intent.putExtra("id", id);
-                intent.putExtra("text", textInputed);
-                intent.putExtra("style", styleInputed);
-                intent.putExtra("quality", qualityInputed);
-                intent.putExtra("translatedInput", translatedInput);
-                startActivity(intent);
+                pager.setCurrentItem(3);
             }
         });
 
