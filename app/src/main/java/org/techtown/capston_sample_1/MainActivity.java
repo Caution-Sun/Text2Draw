@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                int ranStyle = random.nextInt(3);
+                int ranStyle = random.nextInt(4);
                 int ranQul = random.nextInt(9);
 
                 textInputed = "Random";
@@ -188,6 +188,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         styleInputed = "Pop Art";
+                        break;
+                    case 3:
+                        styleInputed = "none";
                         break;
                 }
 
