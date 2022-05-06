@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     final int PERMISSION = 1;
 
-    String quality = "100";
+    String qualityInputed = "100";
 
     // 번역
     Translator koToEnTranslator;
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra("id", id);
                             intent.putExtra("text", textInputed);
                             intent.putExtra("style", styleInputed);
-                            intent.putExtra("quality", quality);
+                            intent.putExtra("quality", qualityInputed);
                             intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
                             startActivity(intent);
                         }).addOnFailureListener(e -> {
@@ -172,30 +172,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                int ranText = random.nextInt(2);
                 int ranStyle = random.nextInt(3);
+                int ranQul = random.nextInt(9);
 
-                switch (ranText){
-                    case 0:
-                        textFragment.editText.setText("과일 그릇에 담긴 사과 그림");
-                        break;
-                    case 1:
-                        textFragment.editText.setText("반 고흐의 초상화가 그려진 침실 그림");
-                        break;
-                }
+                textInputed = "Random";
+
+                translatedInput = "Random";
 
                 switch(ranStyle){
                     case 0:
-                        styleFragment.selectedStyle.setName("Picasso");
+                        styleInputed = "Picasso";
                         break;
                     case 1:
-                        styleFragment.selectedStyle.setName("Monet");
+                        styleInputed = "Monet";
                         break;
                     case 2:
-                        styleFragment.selectedStyle.setName("Pop Art");
+                        styleInputed = "Pop Art";
                         break;
                 }
-                pager.setCurrentItem(3);
+
+                qualityInputed = Integer.toString(100 + (ranQul * 50));
+
+                Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
+                intent.putExtra("login",login);
+                intent.putExtra("id", id);
+                intent.putExtra("text", textInputed);
+                intent.putExtra("style", styleInputed);
+                intent.putExtra("quality", qualityInputed);
+                intent.putExtra("translatedInput", translatedInput);
+                startActivity(intent);
             }
         });
 

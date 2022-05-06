@@ -42,7 +42,7 @@ public class EndFragment extends Fragment {
                     qualityText.setText(String.valueOf((i / 50) * 50));
                 }
                 //qualityText.setText(Integer.toString(i));
-                ((MainActivity)getActivity()).quality = Integer.toString(i);
+                ((MainActivity)getActivity()).qualityInputed = Integer.toString(i);
             }
 
             @Override
