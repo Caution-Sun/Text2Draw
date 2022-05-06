@@ -23,6 +23,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 
@@ -77,6 +79,11 @@ public class ResultActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         btn_ratingRegister = findViewById(R.id.btn_ratingRegister);
         buttonSaveImage = findViewById(R.id.btn_saveImage);
+
+        Glide.with(this)
+                .load(R.raw.loading)
+                .override(300, 300)
+                .into(iv_result);
 
         ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
             String strRating = "평점을 입력해 주세요 (" + rating + "/5.0)";
