@@ -80,10 +80,8 @@ public class ResultActivity extends AppCompatActivity {
         btn_ratingRegister = findViewById(R.id.btn_ratingRegister);
         buttonSaveImage = findViewById(R.id.btn_saveImage);
 
-        Glide.with(this)
-                .load(R.raw.loading)
-                .override(300, 300)
-                .into(iv_result);
+        // loading 화면
+        loading();
 
         ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
             String strRating = "평점을 입력해 주세요 (" + rating + "/5.0)";
@@ -99,6 +97,7 @@ public class ResultActivity extends AppCompatActivity {
         // 서버에 이미지 다시 요청
         buttonRetry = findViewById(R.id.buttonRetry);
         buttonRetry.setOnClickListener(v -> {
+            loading();
             imageRequester.requestImage(translated, style, quality);
         });
 
@@ -106,6 +105,13 @@ public class ResultActivity extends AppCompatActivity {
         buttonSaveImage.setOnClickListener(v -> {
             saveImage();
         });
+    }
+
+    private void loading() {
+        Glide.with(this)
+                .load(R.raw.loading)
+                .override(300, 300)
+                .into(iv_result);
     }
 
     private void saveImage() {
