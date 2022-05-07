@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -92,33 +93,46 @@ public class StartFragment extends Fragment {
                     emailId = textId.getText().toString();
                     password = textPassword.getText().toString();
 
-                    firebaseAuth.signInWithEmailAndPassword(emailId, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()) {
-                                // 이메일 로그인 성공
-                                Log.d(TAG, "이메일 로그인 성공");
+                    if(emailId.equals("") || password.equals("")) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setMessage("아이디 또는 비밀번호를 입력해주세요!")
+                                .setPositiveButton("확인", null);
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    } else {
+                        firebaseAuth.signInWithEmailAndPassword(emailId, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()) {
+                                    // 이메일 로그인 성공
+                                    Log.d(TAG, "이메일 로그인 성공");
 
-                                Toast.makeText(getContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
-                                ((MainActivity) getActivity()).id = textId.getText().toString();
-                                ((MainActivity) getActivity()).pwd = textPassword.getText().toString();
-                                ((MainActivity) getActivity()).login = true;
-                                buttonLogin.setText("LogOut");
+                                    Toast.makeText(getContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
+                                    ((MainActivity) getActivity()).id = textId.getText().toString();
+                                    ((MainActivity) getActivity()).pwd = textPassword.getText().toString();
+                                    ((MainActivity) getActivity()).login = true;
+                                    buttonLogin.setText("LogOut");
 
-                                textViewId.setText(emailId);
-                                layoutLogin.setVisibility(view.INVISIBLE);
-                                layoutWelcome.setVisibility(view.VISIBLE);
+                                    textViewId.setText(emailId);
+                                    layoutLogin.setVisibility(view.INVISIBLE);
+                                    layoutWelcome.setVisibility(view.VISIBLE);
 
-                                ((MainActivity) getActivity()).pager.setCurrentItem(1);
+                                    ((MainActivity) getActivity()).pager.setCurrentItem(1);
 
-                            } else {
-                                // 이메일 로그인 실패
-                                Log.w(TAG, "이메일 로그인 실패");
+                                } else {
+                                    // 이메일 로그인 실패
+                                    Log.w(TAG, "이메일 로그인 실패");
 
-                                Toast.makeText(getContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                                    builder.setMessage("아이디 또는 비밀번호를 다시 입력해주세요!")
+                                            .setPositiveButton("확인", null);
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 } else if(((MainActivity)getActivity()).login == true) {
                     // 로그아웃
                     firebaseAuth.signOut();
