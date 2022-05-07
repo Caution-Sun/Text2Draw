@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -103,7 +104,10 @@ public class ResultActivity extends AppCompatActivity {
 
         // 이미지 저장
         buttonSaveImage.setOnClickListener(v -> {
-            saveImage();
+            if(saveImage())
+                Toast.makeText(this, "이미지 저장에 성공하였습니다", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "이미지 저장에 실패하였습니다", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -114,7 +118,9 @@ public class ResultActivity extends AppCompatActivity {
                 .into(iv_result);
     }
 
-    private void saveImage() {
+    private boolean saveImage() {
+        boolean saveSuccess = false;
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, imageName);
@@ -137,13 +143,21 @@ public class ResultActivity extends AppCompatActivity {
                     contentValues.clear();
                     contentValues.put(MediaStore.Images.Media.IS_PENDING, 0);
                     contentResolver.update(imageItem, contentValues, null, null);
-                } else {
-
                 }
+
+                saveSuccess = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("안드로이드 10 이상부터 이미지 저장 가능")
+                    .setPositiveButton("확인", null);
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
+
+        return saveSuccess;
     }
 
     public byte[] bitmapToByteArray(Bitmap bitmap) {
