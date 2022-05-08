@@ -57,6 +57,7 @@ public class StartFragment extends Fragment {
 
     LinearLayout layoutLogin;
     LinearLayout layoutWelcome;
+    LinearLayout layoutRegisterAndGooglelogin;
 
     TextView textViewId;
 
@@ -74,6 +75,7 @@ public class StartFragment extends Fragment {
 
         layoutLogin = view.findViewById(R.id.layoutLogIn);
         layoutWelcome = view.findViewById(R.id.layoutWelcome);
+        layoutRegisterAndGooglelogin = view.findViewById(R.id.layoutRegisterAndGoogleLogin);
 
         textViewId = view.findViewById(R.id.textViewId);
 
@@ -116,6 +118,7 @@ public class StartFragment extends Fragment {
                                     textViewId.setText(emailId);
                                     layoutLogin.setVisibility(view.INVISIBLE);
                                     layoutWelcome.setVisibility(view.VISIBLE);
+                                    layoutRegisterAndGooglelogin.setVisibility(View.INVISIBLE);
 
                                     ((MainActivity) getActivity()).pager.setCurrentItem(1);
 
@@ -148,8 +151,8 @@ public class StartFragment extends Fragment {
                     layoutWelcome.setVisibility(view.INVISIBLE);
                     layoutLogin.setVisibility(view.VISIBLE);
                     textViewId.setText("");
+                    layoutRegisterAndGooglelogin.setVisibility(View.VISIBLE);
 
-                    buttonSignupG.setEnabled(true);
                 }
             }
         });
@@ -223,8 +226,7 @@ public class StartFragment extends Fragment {
                                         textViewId.setText(firebaseUser.getEmail());
                                         layoutLogin.setVisibility(View.INVISIBLE);
                                         layoutWelcome.setVisibility(View.VISIBLE);
-
-                                        buttonSignupG.setEnabled(false);
+                                        layoutRegisterAndGooglelogin.setVisibility(View.INVISIBLE);
 
                                         ((MainActivity) getActivity()).pager.setCurrentItem(1);
                                     }
