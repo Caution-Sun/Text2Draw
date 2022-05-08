@@ -57,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
     String translatedInput = ""; // 영어로 번역된 글자
     Boolean downloadCheck = false; // 번역 모델 다운로드 확인
 
+    String ranText = "";
+    String koreanRanText = "";
+
+    boolean isSample = false;
+    boolean isSample1 = false;
+    boolean isSample2 = false;
+    boolean isRandom = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,26 +132,52 @@ public class MainActivity extends AppCompatActivity {
                 }else if(pager.getCurrentItem() == 2){
                     pager.setCurrentItem(3);
                 }else if(pager.getCurrentItem() == 3){
-                    if(downloadCheck) {
-                        // 번역
-                        koToEnTranslator.translate(textInputed).addOnSuccessListener(s -> {
-                            // 번역 성공
-                            translatedInput = s;
-                            Log.d(TAG, translatedInput);
+                    if(isRandom) {
+                        translatedInput = ranText;
 
-                            Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
-                            intent.putExtra("login",login);
-                            intent.putExtra("id", id);
-                            intent.putExtra("text", textInputed);
-                            intent.putExtra("style", styleInputed);
-                            intent.putExtra("quality", qualityInputed);
-                            intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
-                            startActivity(intent);
-                        }).addOnFailureListener(e -> {
-                            // 번역 실패
-                        });
+                        Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
+                        intent.putExtra("login",login);
+                        intent.putExtra("id", id);
+                        intent.putExtra("text", textInputed);
+                        intent.putExtra("style", styleInputed);
+                        intent.putExtra("quality", qualityInputed);
+                        intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
+                        startActivity(intent);
+                    } else if(isSample) {
+                        if(isSample1)
+                            translatedInput = "A painting of an apple in a fruit bowl";
+                        else if(isSample2)
+                            translatedInput = "A picture of a bedroom with a portrait of Van Gogh";
+
+                        Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
+                        intent.putExtra("login",login);
+                        intent.putExtra("id", id);
+                        intent.putExtra("text", textInputed);
+                        intent.putExtra("style", styleInputed);
+                        intent.putExtra("quality", qualityInputed);
+                        intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
+                        startActivity(intent);
+                    } else {
+                        if(downloadCheck) {
+                            // 번역
+                            koToEnTranslator.translate(textInputed).addOnSuccessListener(s -> {
+                                // 번역 성공
+                                translatedInput = s;
+                                Log.d(TAG, translatedInput);
+
+                                Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
+                                intent.putExtra("login",login);
+                                intent.putExtra("id", id);
+                                intent.putExtra("text", textInputed);
+                                intent.putExtra("style", styleInputed);
+                                intent.putExtra("quality", qualityInputed);
+                                intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
+                                startActivity(intent);
+                            }).addOnFailureListener(e -> {
+                                // 번역 실패
+                            });
+                        }
                     }
-
 
                 }
             }
@@ -172,6 +206,10 @@ public class MainActivity extends AppCompatActivity {
         buttonRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isRandom = true;
+                isSample = false;
+                isSample1 = false;
+                isSample2 = false;
 
                 int ranText1 = random.nextInt(4);
                 int ranText2 = random.nextInt(10);
@@ -183,11 +221,16 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> text2 = new ArrayList<String>(Arrays.asList("spinning", "dreaming", "watering", "loving" ,"eating", "drinking", "sleeping", "repeating", "surreal", "psychedelic"));
                 ArrayList<String> text3 = new ArrayList<String>(Arrays.asList("fish", "egg", "peacock", "watermelon", "pickle", "horse", "dog", "house", "kitchen", "bedroom", "door", "table", "lamp", "dresser", "watch", "logo", "icon", "tree",
                         "grass", "flower", "plant", "shrub" ,"bloom" ,"screwdriver", "spanner", "figurine", "statue", "graveyard", "hotel", "bus", "train", "car", "computer", "monitor"));
-                String ranText = "";
+
+                ArrayList<String> koreanText1 = new ArrayList<String>(Arrays.asList("그림", "연필 아트 스케치", "삽화" ,"사진"));
+                ArrayList<String> koreanText2 = new ArrayList<String>(Arrays.asList("회전하는", "꿈꾸는", "물 뿌리는", "사랑하는" ,"먹는", "마시는", "잠자는", "반복하는", "초현실적인", "사이키델릭한"));
+                ArrayList<String> koreanText3 = new ArrayList<String>(Arrays.asList("물고기의", "계란", "공작", "수박", "피클", "말", "개", "집", "주방", "침실", "문", "식탁", "램프", "옷장", "시계", "상징", "아이콘", "나무",
+                        "풀", "꽃", "식물", "관목" ,"꽃" ,"드라이버", "스패너", "작은 조각상", "조각상", "묘지", "호텔", "버스", "기차", "자동차", "컴퓨터", "모니터"));
 
                 ranText += text1.get(ranText1) + " " + text2.get(ranText2) + " " + text3.get(ranText3);
+                koreanRanText = koreanText2.get(ranText2) + " " + koreanText3.get(ranText3) + " " + koreanText1.get(ranText1);
 
-                textFragment.editText.setText(ranText);
+                textFragment.editText.setText(koreanRanText);
 
                 switch(ranStyle){
                     case 0:

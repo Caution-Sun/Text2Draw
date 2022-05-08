@@ -41,6 +41,9 @@ public class TextFragment extends Fragment {
         buttonSampleText1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity)getActivity()).isRandom = false;
+                ((MainActivity)getActivity()).isSample = true;
+                ((MainActivity)getActivity()).isSample1 = true;
                 editText.setText("과일 그릇에 담긴 사과 그림");
             }
         });
@@ -48,6 +51,9 @@ public class TextFragment extends Fragment {
         buttonSampleText2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MainActivity)getActivity()).isRandom = false;
+                ((MainActivity)getActivity()).isSample = true;
+                ((MainActivity)getActivity()).isSample2 = true;
                 editText.setText("반 고흐의 초상화가 그려진 침실 그림");
             }
         });
