@@ -148,6 +148,8 @@ public class StartFragment extends Fragment {
                     layoutWelcome.setVisibility(view.INVISIBLE);
                     layoutLogin.setVisibility(view.VISIBLE);
                     textViewId.setText("");
+
+                    buttonSignupG.setEnabled(true);
                 }
             }
         });
@@ -217,6 +219,12 @@ public class StartFragment extends Fragment {
 
                                         ((MainActivity) getActivity()).login = true;
                                         buttonLogin.setText("LogOut");
+
+                                        textViewId.setText(firebaseUser.getEmail());
+                                        layoutLogin.setVisibility(View.INVISIBLE);
+                                        layoutWelcome.setVisibility(View.VISIBLE);
+
+                                        buttonSignupG.setEnabled(false);
 
                                         ((MainActivity) getActivity()).pager.setCurrentItem(1);
                                     }
