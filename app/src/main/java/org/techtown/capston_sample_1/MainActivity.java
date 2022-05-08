@@ -33,7 +33,8 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "<<MainActivity>>";
+    private static final String TAG = "<<MainActivity>>";
+    private static final int RC_RESULT = 500;
 
     ViewPager pager;
 
@@ -109,6 +110,26 @@ public class MainActivity extends AppCompatActivity {
         buttonRandom.setVisibility(View.INVISIBLE);
         buttonRandom.setEnabled(false);
 
+        pager = findViewById(R.id.pagerInfo);
+        pager.setOffscreenPageLimit(4);
+
+
+        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
+
+        StartFragment startFragment = new StartFragment();
+        adapter.addItem(startFragment);
+
+        TextFragment textFragment = new TextFragment();
+        adapter.addItem(textFragment);
+
+        StyleFragment styleFragment = new StyleFragment();
+        adapter.addItem(styleFragment);
+
+        EndFragment endFragment = new EndFragment();
+        adapter.addItem(endFragment);
+
+        pager.setAdapter(adapter);
+
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("style", styleInputed);
                         intent.putExtra("quality", qualityInputed);
                         intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
-                        startActivity(intent);
+                        startActivityForResult(intent, RC_RESULT);
                     } else if(isSample) {
                         if(isSample1)
                             translatedInput = "A painting of an apple in a fruit bowl";
@@ -156,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("style", styleInputed);
                         intent.putExtra("quality", qualityInputed);
                         intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
-                        startActivity(intent);
+                        startActivityForResult(intent, RC_RESULT);
                     } else {
                         if(downloadCheck) {
                             // 번역
@@ -172,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra("style", styleInputed);
                                 intent.putExtra("quality", qualityInputed);
                                 intent.putExtra("translatedInput", translatedInput); // 영어로 번역된 글자
-                                startActivity(intent);
+                                startActivityForResult(intent, RC_RESULT);
                             }).addOnFailureListener(e -> {
                                 // 번역 실패
                             });
@@ -182,26 +203,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        pager = findViewById(R.id.pagerInfo);
-        pager.setOffscreenPageLimit(4);
-
-
-        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-
-        StartFragment startFragment = new StartFragment();
-        adapter.addItem(startFragment);
-
-        TextFragment textFragment = new TextFragment();
-        adapter.addItem(textFragment);
-
-        StyleFragment styleFragment = new StyleFragment();
-        adapter.addItem(styleFragment);
-
-        EndFragment endFragment = new EndFragment();
-        adapter.addItem(endFragment);
-
-        pager.setAdapter(adapter);
 
         buttonRandom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> koreanText3 = new ArrayList<String>(Arrays.asList("물고기의", "계란", "공작", "수박", "피클", "말", "개", "집", "주방", "침실", "문", "식탁", "램프", "옷장", "시계", "상징", "아이콘", "나무",
                         "풀", "꽃", "식물", "관목" ,"꽃" ,"드라이버", "스패너", "작은 조각상", "조각상", "묘지", "호텔", "버스", "기차", "자동차", "컴퓨터", "모니터"));
 
-                ranText += text1.get(ranText1) + " " + text2.get(ranText2) + " " + text3.get(ranText3);
+                ranText = text1.get(ranText1) + " " + text2.get(ranText2) + " " + text3.get(ranText3);
                 koreanRanText = koreanText2.get(ranText2) + " " + koreanText3.get(ranText3) + " " + koreanText1.get(ranText1);
 
                 textFragment.editText.setText(koreanRanText);

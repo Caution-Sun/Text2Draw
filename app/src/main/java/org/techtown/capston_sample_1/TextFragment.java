@@ -38,12 +38,23 @@ public class TextFragment extends Fragment {
         buttonSampleText1 = (Button) view.findViewById(R.id.buttonSampleText1);
         buttonSampleText2 = (Button) view.findViewById(R.id.buttonSampleText2);
 
+        // focus 가 된 순간 Random, Sample 둘 다 아닌 것으로 처리
+        editText.setOnFocusChangeListener((v, hasFocus) -> {
+            if(hasFocus) {
+                ((MainActivity)getActivity()).isRandom = false;
+                ((MainActivity)getActivity()).isSample = false;
+                ((MainActivity)getActivity()).isSample1 = false;
+                ((MainActivity)getActivity()).isSample2 = false;
+            }
+        });
+
         buttonSampleText1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).isRandom = false;
                 ((MainActivity)getActivity()).isSample = true;
                 ((MainActivity)getActivity()).isSample1 = true;
+                ((MainActivity)getActivity()).isSample2 = false;
                 editText.setText("과일 그릇에 담긴 사과 그림");
             }
         });
@@ -54,6 +65,7 @@ public class TextFragment extends Fragment {
                 ((MainActivity)getActivity()).isRandom = false;
                 ((MainActivity)getActivity()).isSample = true;
                 ((MainActivity)getActivity()).isSample2 = true;
+                ((MainActivity)getActivity()).isSample1 = false;
                 editText.setText("반 고흐의 초상화가 그려진 침실 그림");
             }
         });

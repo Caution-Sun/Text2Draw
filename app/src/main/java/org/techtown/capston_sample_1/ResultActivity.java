@@ -47,6 +47,7 @@ public class ResultActivity extends AppCompatActivity {
     Button buttonRetry;
     Button buttonSaveImage;
     ImageView iv_result;
+    Button btn_back;
 
     ProgressDialog dialog;
 
@@ -80,6 +81,13 @@ public class ResultActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         btn_ratingRegister = findViewById(R.id.btn_ratingRegister);
         buttonSaveImage = findViewById(R.id.btn_saveImage);
+        btn_back = findViewById(R.id.btn_back);
+
+        btn_back.setOnClickListener(v -> {
+            Intent backIntent = new Intent();
+            setResult(RESULT_OK, backIntent);
+            finish();
+        });
 
         // loading 화면
         loading();

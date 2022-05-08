@@ -115,5 +115,16 @@
         app:layout_constraintStart_toEndOf="@+id/buttonRetry"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="57dp"
+        android:background="?attr/actionModeCloseDrawable"
+        app:layout_constraintEnd_toStartOf="@+id/textView17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
