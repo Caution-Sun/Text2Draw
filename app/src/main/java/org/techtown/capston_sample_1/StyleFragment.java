@@ -63,6 +63,8 @@ public class StyleFragment extends Fragment {
             public void onItemClicked(StyleAdapter.ViewHolder holder, View view, int position) {
                 selectedStyle = adapter.getItem(position);
                 Toast.makeText(getActivity(),selectedStyle.getName() + " 선택됨",Toast.LENGTH_SHORT).show();
+
+                ((MainActivity) getActivity()).pager.setCurrentItem(3);
             }
         });
 
