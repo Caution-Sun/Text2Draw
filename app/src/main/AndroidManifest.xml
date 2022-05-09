@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Capston_Sample_1">
         <activity
+            android:name=".RecommendActivity"
+            android:exported="false" />
+        <activity
             android:name=".GoogleSignupActivity"
             android:exported="false" />
         <activity

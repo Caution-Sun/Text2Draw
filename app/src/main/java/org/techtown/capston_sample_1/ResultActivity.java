@@ -5,8 +5,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,6 +44,7 @@ public class ResultActivity extends AppCompatActivity {
     Button btn_ratingRegister;
     Button buttonRetry;
     Button buttonSaveImage;
+    Button buttonRecommend;
     ImageView iv_result;
     Button btn_back;
 
@@ -81,6 +80,7 @@ public class ResultActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         btn_ratingRegister = findViewById(R.id.btn_ratingRegister);
         buttonSaveImage = findViewById(R.id.btn_saveImage);
+        buttonRecommend = findViewById(R.id.btn_recommend);
         btn_back = findViewById(R.id.btn_back);
 
         btn_back.setOnClickListener(v -> {
@@ -117,7 +117,15 @@ public class ResultActivity extends AppCompatActivity {
             else
                 Toast.makeText(this, "이미지 저장에 실패하였습니다", Toast.LENGTH_SHORT).show();
         });
+
+        buttonRecommend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RecommendActivity.class);
+            }
+        });
     }
+
 
     private void loading() {
         Glide.with(this)
