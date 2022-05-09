@@ -272,6 +272,23 @@ public class MainActivity extends AppCompatActivity {
                     buttonRandom.setVisibility(View.GONE);
                     buttonRandom.setEnabled(false);
 
+                } else if (position == 1){
+                    buttonRandom.setVisibility(View.VISIBLE);
+                    buttonRandom.setEnabled(true);
+
+                    buttonBack.setVisibility(View.VISIBLE);
+                    buttonNext.setText("Next");
+                    buttonNext.setEnabled(true);
+
+                } else if (position == 2){
+
+                    buttonRandom.setVisibility(View.GONE);
+                    buttonRandom.setEnabled(true);
+
+                    buttonBack.setVisibility(View.VISIBLE);
+                    buttonNext.setText("Next");
+                    buttonNext.setEnabled(true);
+
                 } else if(position == 3) {
 
                     buttonNext.setText("Make Image!");
@@ -295,15 +312,6 @@ public class MainActivity extends AppCompatActivity {
                         endFragment.styleInput.setText("그림체를 선택해주세요!");
                     }
 
-
-                }else{
-
-                    buttonRandom.setVisibility(View.VISIBLE);
-                    buttonRandom.setEnabled(true);
-
-                    buttonBack.setVisibility(View.VISIBLE);
-                    buttonNext.setText("Next");
-                    buttonNext.setEnabled(true);
                 }
 
             }
