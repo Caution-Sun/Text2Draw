@@ -56,7 +56,7 @@
                     android:background="@drawable/btn_background"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="과일 그릇에 담긴 사과 그림"
+                    android:text="@string/sample_1"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -68,7 +68,7 @@
                     android:background="@drawable/btn_background"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="반 고흐의 초상화가 그려진 침실 그림"
+                    android:text="@string/sample_2"
                     android:textColor="@color/black" />
             </LinearLayout>
         </HorizontalScrollView>

@@ -55,7 +55,7 @@ public class TextFragment extends Fragment {
                 ((MainActivity)getActivity()).isSample = true;
                 ((MainActivity)getActivity()).isSample1 = true;
                 ((MainActivity)getActivity()).isSample2 = false;
-                editText.setText("과일 그릇에 담긴 사과 그림");
+                editText.setText(buttonSampleText1.getText());
             }
         });
 
@@ -66,7 +66,7 @@ public class TextFragment extends Fragment {
                 ((MainActivity)getActivity()).isSample = true;
                 ((MainActivity)getActivity()).isSample2 = true;
                 ((MainActivity)getActivity()).isSample1 = false;
-                editText.setText("반 고흐의 초상화가 그려진 침실 그림");
+                editText.setText(buttonSampleText2.getText());
             }
         });
 
