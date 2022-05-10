@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+    android:layout_margin="0dp"
+    android:background="@drawable/splash_base"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".RecommendActivity">
 
     <Button
@@ -41,39 +43,49 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp">
 
             <Button
                 android:id="@+id/btn_text1"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/btn_background"
                 android:text="Recommended Text 1" />
 
             <Button
                 android:id="@+id/btn_text2"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/btn_background"
                 android:text="Recommended Text 2" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
             <Button
                 android:id="@+id/btn_text3"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/btn_background"
                 android:text="Recommended Text 3" />
 
             <Button
                 android:id="@+id/btn_text4"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:background="@drawable/btn_background"
                 android:text="Recommended Text 4" />
         </TableRow>
 
@@ -117,8 +129,10 @@
                 android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
+
     <ImageView
         android:id="@+id/iv_recommendImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/noimagefound" />
 </LinearLayout>
