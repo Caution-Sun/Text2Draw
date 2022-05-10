@@ -140,7 +140,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_background"
             android:padding="10dp"
-            android:text="Recommend"
+            android:text="추천받기"
             android:textSize="24sp"
             android:textStyle="bold" />
 
