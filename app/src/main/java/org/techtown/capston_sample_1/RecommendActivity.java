@@ -52,25 +52,25 @@ public class RecommendActivity extends AppCompatActivity {
         btn_text1.setOnClickListener(v -> {
             loading();
             ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
-            imageRequester.requestImage(btn_text1.getText().toString(), "Picasso", "100");
+            imageRequester.requestImage(btn_text1.getText().toString(), "Picasso", "100", "false");
         });
 
         btn_text2.setOnClickListener(v -> {
             loading();
             ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
-            imageRequester.requestImage(btn_text2.getText().toString(), "Picasso", "100");
+            imageRequester.requestImage(btn_text2.getText().toString(), "Picasso", "100", "false");
         });
 
         btn_text3.setOnClickListener(v -> {
             loading();
             ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
-            imageRequester.requestImage(btn_text3.getText().toString(), "Picasso", "100");
+            imageRequester.requestImage(btn_text3.getText().toString(), "Picasso", "100", "false");
         });
 
         btn_text4.setOnClickListener(v -> {
             loading();
             ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
-            imageRequester.requestImage(btn_text4.getText().toString(), "Picasso", "100");
+            imageRequester.requestImage(btn_text4.getText().toString(), "Picasso", "100", "false");
         });
 
         buttonCancel_rec.setOnClickListener(new View.OnClickListener() {

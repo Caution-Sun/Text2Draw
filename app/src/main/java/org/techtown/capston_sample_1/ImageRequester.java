@@ -45,11 +45,11 @@ public class ImageRequester {
         this.imageCallback = imageCallback;
     }
 
-    public void requestImage(String translatedInput, String styleInput, String quality) {
-        execute(translatedInput, styleInput, quality);
+    public void requestImage(String translatedInput, String styleInput, String quality, String b) {
+        execute(b, translatedInput, styleInput, quality);
     }
 
-    private void execute(String translatedInput, String styleInput, String quality) {
+    private void execute(String translatedInput, String styleInput, String quality, String b) {
         disposable = Observable.fromCallable(() -> {
             try {
                 clientSocket = new Socket();
@@ -57,7 +57,7 @@ public class ImageRequester {
 
                 // 데이터 전송
                 pw = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"));
-                pw.write(translatedInput + "|" + styleInput + "|" + quality);
+                pw.write(translatedInput + "|" + styleInput + "|" + quality + "|" + b);
                 pw.flush();
 
                 // 데이터 수신
