@@ -27,9 +27,9 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" Text To Draw"
+                android:text="Artistic Sentence"
                 android:textColor="@color/black"
-                android:textSize="48sp"
+                android:textSize="40sp"
                 android:textStyle="italic" />
 
         </LinearLayout>
