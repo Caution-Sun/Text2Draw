@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
+import java.util.StringTokenizer;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -35,6 +36,12 @@ public class ResultActivity extends AppCompatActivity {
     String style = "";
     String quality = "100";
     String translated = ""; // 영어로 번역된 글자
+
+    String text1;
+    String text2;
+    String text3;
+    String text4;
+    String finalText;
 
     String imageName;
     Bitmap resultImage;
@@ -122,6 +129,12 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), RecommendActivity.class);
+                intent.putExtra("text1", text1);
+                intent.putExtra("text2", text2);
+                intent.putExtra("text3", text3);
+                intent.putExtra("text4", text4);
+                intent.putExtra("finalText", finalText);
+                startActivityForResult(intent, 600);
             }
         });
     }
@@ -200,9 +213,20 @@ public class ResultActivity extends AppCompatActivity {
     // 결과 이미지 콜백
     ImageCallback imageCallback = new ImageCallback() {
         @Override
-        public void onResult(Bitmap resultBitmap) {
-            iv_result.setImageBitmap(resultBitmap);
-            resultImage = resultBitmap;
+        public void onResult(ResultData resultData) {
+            StringTokenizer stringTokenizer = new StringTokenizer(resultData.getText(), "|");
+            text1 = stringTokenizer.nextToken();
+            Log.d("<<ResultActivity>>", text1);
+            text2 = stringTokenizer.nextToken();
+            Log.d("<<ResultActivity>>", text2);
+            text3 = stringTokenizer.nextToken();
+            Log.d("<<ResultActivity>>", text3);
+            text4 = stringTokenizer.nextToken();
+            Log.d("<<ResultActivity>>", text4);
+            finalText = stringTokenizer.nextToken();
+            Log.d("<<ResultActivity>>", finalText);
+            iv_result.setImageBitmap(resultData.getBitmap());
+            resultImage = resultData.getBitmap();
         }
     };
 

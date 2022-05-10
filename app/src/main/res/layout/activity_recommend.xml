@@ -44,14 +44,14 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_text1"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:text="Recommended Text 1" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_text2"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:layout_weight="1"
@@ -63,14 +63,14 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btn_text3"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:text="Recommended Text 3" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btn_text4"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
                 android:layout_weight="1"
@@ -117,4 +117,8 @@
                 android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_recommendImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>
