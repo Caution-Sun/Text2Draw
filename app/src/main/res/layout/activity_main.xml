@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_base"
+    android:background="@color/material_dynamic_neutral20"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -26,6 +26,7 @@
             android:layout_gravity="left"
             android:background="@drawable/btn_background"
             android:text="Back"
+            android:textColor="#FFC107"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +42,7 @@
             android:enabled="false"
             android:gravity="center"
             android:text="Random"
+            android:textColor="#FFC107"
             android:textStyle="bold"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,6 +58,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Next"
+            android:textColor="#FFC107"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

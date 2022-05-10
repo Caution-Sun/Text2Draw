@@ -6,7 +6,7 @@
 
     <stroke
         android:width="3dp"
-        android:color="@color/black" /> <!-- 선색 -->
+        android:color="#FFC107" /> <!-- 선색 -->
 
     <corners
         android:topLeftRadius="10dp"

@@ -16,7 +16,7 @@
         android:layout_marginTop="50dp"
         android:fontFamily="@font/andika_new_basic_bold"
         android:text="이미지로 만들 문장을 입력해주세요"
-        android:textColor="@color/white"
+        android:textColor="#FFC107"
         android:textSize="26sp"
         android:textStyle="bold" />
 
@@ -36,7 +36,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
             android:text="Sample"
-            android:textColor="@color/black"
+            android:textColor="#FFC107"
             android:textStyle="bold" />
 
         <HorizontalScrollView
@@ -57,7 +57,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="@string/sample_1"
-                    android:textColor="@color/black"
+                    android:textColor="#FFC107"
                     android:textSize="14sp" />
 
                 <Button
@@ -69,7 +69,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="@string/sample_2"
-                    android:textColor="@color/black" />
+                    android:textColor="#FFC107" />
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
@@ -94,7 +94,8 @@
             android:lines="99"
             android:scrollHorizontally="true"
             android:singleLine="false"
-            android:textAlignment="gravity" />
+            android:textAlignment="gravity"
+            android:textColorHint="@color/browser_actions_title_color" />
     </androidx.cardview.widget.CardView>
 
     <ImageButton

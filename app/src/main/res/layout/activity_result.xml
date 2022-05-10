@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_base"
+    android:background="@color/material_dynamic_neutral20"
     android:orientation="vertical">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="Result"
-        android:textColor="@color/black"
+        android:textColor="#FFC107"
         android:textSize="34sp"
         android:textStyle="bold"
         android:typeface="monospace"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="평점을 입력해 주세요 (0.5/5.0)"
-                android:textColor="@color/black"
+                android:textColor="#FFC107"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -74,6 +74,7 @@
             android:layout_marginStart="20dp"
             android:background="@drawable/btn_background"
             android:text="등록"
+            android:textColor="#FFC107"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -113,6 +114,7 @@
             android:background="@drawable/btn_background"
             android:padding="10dp"
             android:text="Retry"
+            android:textColor="#FFC107"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -129,6 +131,7 @@
             android:background="@drawable/btn_background"
             android:padding="10dp"
             android:text="SAVE"
+            android:textColor="#FFC107"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -141,6 +144,7 @@
             android:background="@drawable/btn_background"
             android:padding="10dp"
             android:text="추천받기"
+            android:textColor="#FFC107"
             android:textSize="24sp"
             android:textStyle="bold" />
 
