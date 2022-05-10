@@ -107,14 +107,14 @@ public class ResultActivity extends AppCompatActivity {
 
         // 서버로부터 결과 이미지 수신
         ImageRequester imageRequester = new ImageRequester(serverIp, serverPort, imageCallback);
-        imageRequester.requestImage(translated, style, quality, "true");
+        imageRequester.requestImage("true", translated, style, quality);
         Log.d("<<ResultActivity>>", translated);
 
         // 서버에 이미지 다시 요청
         buttonRetry = findViewById(R.id.buttonRetry);
         buttonRetry.setOnClickListener(v -> {
             loading();
-            imageRequester.requestImage(translated, style, quality, "true");
+            imageRequester.requestImage("true", translated, style, quality);
         });
 
         // 이미지 저장
