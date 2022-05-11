@@ -272,10 +272,6 @@ public class MainActivity extends AppCompatActivity {
                     buttonRandom.setVisibility(View.GONE);
                     buttonRandom.setEnabled(false);
 
-                    // fragment_end 캡쳐를 위한 임시 코드----------------
-                    buttonNext.setVisibility(View.VISIBLE);
-                    //------------------------------------------------
-
                 } else if (position == 1){
                     buttonRandom.setVisibility(View.VISIBLE);
                     buttonRandom.setEnabled(true);
@@ -283,10 +279,6 @@ public class MainActivity extends AppCompatActivity {
                     buttonBack.setVisibility(View.VISIBLE);
                     buttonNext.setText("Next");
                     buttonNext.setEnabled(true);
-
-                    // fragment_end 캡쳐를 위한 임시 코드----------------
-                    buttonNext.setVisibility(View.VISIBLE);
-                    //------------------------------------------------
 
                 } else if (position == 2){
 
@@ -297,15 +289,7 @@ public class MainActivity extends AppCompatActivity {
                     buttonNext.setText("Next");
                     buttonNext.setEnabled(true);
 
-                    // fragment_end 캡쳐를 위한 임시 코드----------------
-                    buttonNext.setVisibility(View.VISIBLE);
-                    //------------------------------------------------
-
                 } else if(position == 3) {
-
-                    // fragment_end 캡쳐를 위한 임시 코드----------------
-                    buttonNext.setVisibility(View.INVISIBLE);
-                    //------------------------------------------------
 
                     buttonNext.setText("Make Image!");
 
