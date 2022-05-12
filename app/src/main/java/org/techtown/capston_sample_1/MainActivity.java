@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(intent, RC_RESULT);
                     } else if(isSample) {
                         if(isSample1)
-                            translatedInput = "A painting of an apple in a fruit bowl";
+                            translatedInput = "waterfall";
                         else if(isSample2)
                             translatedInput = "A picture of a bedroom with a portrait of Van Gogh";
 
