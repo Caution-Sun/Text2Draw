@@ -23,6 +23,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -61,6 +65,9 @@ public class ResultActivity extends AppCompatActivity {
     String serverIp = "192.168.0.8";
     int serverPort = 2031;
 
+    FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
@@ -89,6 +96,9 @@ public class ResultActivity extends AppCompatActivity {
         buttonSaveImage = findViewById(R.id.btn_saveImage);
         buttonRecommend = findViewById(R.id.btn_recommend);
         btn_back = findViewById(R.id.btn_back);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Text2Drawing");
 
         btn_back.setOnClickListener(v -> {
             Intent backIntent = new Intent();
@@ -135,6 +145,26 @@ public class ResultActivity extends AppCompatActivity {
                 intent.putExtra("text4", text4);
                 intent.putExtra("finalText", finalText);
                 startActivityForResult(intent, 600);
+            }
+        });
+
+        btn_ratingRegister.setOnClickListener(v -> {
+            if(id.equals("")) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("비회원은 이용할 수 없습니다")
+                        .setPositiveButton("확인", null)
+                        .create()
+                        .show();
+            } else {
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                Rating rating = new Rating();
+                rating.setId(firebaseUser.getEmail());
+                rating.setInputText(translated);
+                rating.setStyle(style);
+                rating.setRating(String.valueOf(ratingBar.getRating()));
+                databaseReference.child("Rating").child(firebaseUser.getUid()).setValue(rating);
+
+                Toast.makeText(this, "등록되었습니다", Toast.LENGTH_SHORT).show();
             }
         });
     }
