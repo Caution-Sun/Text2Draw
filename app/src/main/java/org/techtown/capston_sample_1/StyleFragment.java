@@ -44,6 +44,7 @@ public class StyleFragment extends Fragment {
                 startActivityForResult(intent, 101);
             }
         });
+        buttoninfo.setVisibility(View.INVISIBLE);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 

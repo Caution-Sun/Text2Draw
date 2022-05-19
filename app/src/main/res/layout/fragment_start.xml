@@ -86,6 +86,7 @@
                         android:ems="10"
                         android:hint="ID"
                         android:inputType="textEmailAddress"
+                        android:textColor="#FFC107"
                         android:textColorHint="#FFC107" />
 
                     <EditText
@@ -96,7 +97,8 @@
                         android:ems="10"
                         android:hint="PassWord"
                         android:inputType="textPassword"
-                        android:textColorHint="#FFC107" />
+                        android:textColorHint="#FFC107"
+                        android:textColor="#FFC107"/>
                 </LinearLayout>
             </FrameLayout>
 

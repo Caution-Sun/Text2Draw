@@ -149,7 +149,7 @@ public class ResultActivity extends AppCompatActivity {
         });
 
         btn_ratingRegister.setOnClickListener(v -> {
-            if(id.equals("")) {
+            if(!login) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("비회원은 이용할 수 없습니다")
                         .setPositiveButton("확인", null)
